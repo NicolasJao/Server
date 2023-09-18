@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head>
+    <title>yeet</title>
+    <script src="https://cdn.socket.io/4.4.0/socket.io.min.js"></script>
+    <script>
+        var socket = io.connect("http://localhost:64999", {transports : ["websocket"]});
+        socket.on("message", (incoming) => {   
+            console.log(incoming)
+        });
+        function sendpacket() {
+            var messageinput = document.getElementById("message");
+            var packet = {
+                "message": messageinput.value
+            }
+            socket.emit("message", packet);
+            messageinput.value = "";
+        }
+    </script>
+</head>
+<html>
+<body>
+
+    <div id="chatbox"></div>
+    <hr>
+    <input type="text" id="message" />
+    <button onclick="sendpacket()">Send</button>
+
+</body>
+<!-- seb stuff: 10.6.161.47:64758 -->
+<!-- my stuff: localhost: 64999 -->
+</html>
+
